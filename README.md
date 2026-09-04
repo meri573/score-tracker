@@ -1,4 +1,4 @@
-# Score tracker
+# Tetris score tracker
 
 ##Sovelluksen toiminnot
 
