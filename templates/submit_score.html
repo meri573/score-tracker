@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Score submission</title>
+</head>
+
+<body>
+  <form action="/result" method="post">
+    <p>Game version</p>
+    <p>
+      <input type="radio" name="game" value="1" /> Tetris: The Grand Master
+      <input type="radio" name="game" value="2" /> Tetris: The Grand Master 2 
+      <input type="radio" name="game" value="3" /> Tetris: The Grand Master 3
+    </p>
+    <p>Additional options</p>
+    <p>
+      <input type="checkbox" name="extra" value="A" /> 20G mode
+      <input type="checkbox" name="extra" value="B" /> Big mode
+    </p>
+    <p>Description</p>
+    <input type="submit" value="Submit" />
+  </form>
+</body>
+
+</html>
