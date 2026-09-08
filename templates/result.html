@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Result</title>
+</head>
+
+<body>
+  <p>your game version: {{ game }}</p>
+  <p>
+    additional options:
+    <ul>
+      {% for extra in extras %}
+      <li>{{ extra }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+  <p>
+    Description: <br />
+    {{ description }}
+  </p>
+</body>
+
+</html>
