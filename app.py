@@ -7,6 +7,12 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
+@app.route("/register")
+def register():
+    return render_template(register.html)
+
+
 @app.route("/submit_score")
 def submit_score():
     return render_template("submit_score.html")
