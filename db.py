@@ -5,3 +5,9 @@ def get_connection():
     con.execute("PRAGMA foreign_keys = ON")
     con.row_factory = sqlite3.Row
     return con
+
+def execute(sql, params=[]):
+    con = get_connection()
+    result = con.execute(sql,params)
+    con.commit()
+    con.close()
