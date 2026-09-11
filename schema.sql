@@ -7,6 +7,9 @@ CREATE TABLE users (
 CREATE TABLE results (
     id INTEGER PRIMARY KEY,
     game TEXT,
+    time TEXT,
+    grade TEXT
+    score INTEGER
     big_mode INTEGER,
     20G_mode INTEGER,
     description TEXT,
