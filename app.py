@@ -57,9 +57,9 @@ def submit_score():
 @app.route("/result", methods=["POST"])
 def result():
     game = request.form["game"]
-    time = request.form
-    grade = 
-    score = 
+    time = request.form["time"]
+    grade = request.form["grade"]
+    score = request.form["score"]
     big_mode = 0
     twentyg_mode = 0 
     extras = request.form.getlist("extra")
@@ -67,9 +67,9 @@ def result():
     user_id = session[user_id]
 
     for extra in extras:
-        if extra = "20g_mode":
+        if extra == "twentyg_mode":
             twentyg_mode = 1
-        if extra = "big_mode": 
+        if extra == "big_mode":
             big_mode = 1
 
     sql = "INSERT INTO results (game, time, grade, score, big_mode, 20g_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
