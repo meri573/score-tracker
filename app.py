@@ -32,6 +32,7 @@ def create():
 
     return "Account created"
 
+
 @app.route("/submit_score")
 def submit_score():
     return render_template("submit_score.html")
@@ -39,6 +40,21 @@ def submit_score():
 @app.route("/result", methods=["POST"])
 def result():
     game = request.form["game"]
+    time = 
+    grade = 
+    score = 
+    big_mode = 0
+    20g_mode = 0 
     extras = request.form.getlist("extra")
     description = request.form["description"]
+    user_id =
+
+    for extra in extras:
+        if extra = "20g_mode":
+            20g_mode = 1
+        if extra = "big_mode": 
+            big_mode = 1
+
+    sql = "INSERT INTO results (game, time, grade, score, big_mode, 20g_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime("now"), user_id)"
+
     return render_template("result.html", game=game, extras=extras, description=description)
