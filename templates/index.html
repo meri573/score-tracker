@@ -7,12 +7,28 @@
 
 <body>
   <h1>Etusivu</h1>
+  
+  {% if session.username %}
   <p>
-    <b>Tervetuloa</b> <i>sovellukseen</i>!
+    You are logged in as {{ session.username }}
   </p>
   <p>
     <a href="submit_score.html">Submit new score</a>
   </p>
+  {% else %}
+  <form action="/login" method="post">
+    <p>
+      username: <br />
+      <input type="text" name="username" />
+    </p>
+    <p>
+      password: <br />
+      <input type="password" name="password" />
+    </p>
+    <input type="submit" value="Login" />
+  </form>
+  {% endif %}
+
 </body>
 
 </html>
