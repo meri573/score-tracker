@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask
-from flask import render_template, request
-from werkzeug.security import generate_password_hash
+from flask import redirect,render_template, request, session
+from werkzeug.security import generate_password_hash, check_password_hash
 import db
 
 app = Flask(__name__)
@@ -32,6 +32,17 @@ def create():
 
     return "Account created"
 
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form["username"]
+    password = request.form["password"]
+
+    sql = "SELECT password_hash FROM users WHERE username = ?"
+    password_hash = db.query(sql,[username])[0][0]
+
+    if check_password_hash(password_hash, password):
+        session[username] = username
+        return redirect("/")
 
 @app.route("/submit_score")
 def submit_score():
