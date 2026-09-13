@@ -11,7 +11,7 @@ CREATE TABLE results (
     grade TEXT
     score INTEGER
     big_mode INTEGER,
-    20G_mode INTEGER,
+    twentyg_mode INTEGER,
     description TEXT,
     submitted_at TEXT,
     user_id INTEGER REFERENCES users
