@@ -43,6 +43,8 @@ def login():
     if check_password_hash(password_hash, password):
         session[username] = username
         return redirect("/")
+    else:
+        return "ERROR: wrong username or password"
 
 @app.route("/submit_score")
 def submit_score():
