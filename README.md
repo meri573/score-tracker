@@ -11,3 +11,21 @@
 * sovelluksesa on käyttäjäsivut, jotka näyttävät tilastoja ja käyttäjän lisäämät tulokset
 * käyttäjä pystyy valitsemaan tulokselle yhden tai useamman luokittelun (esim. tetris versio, pelimoodi, erikoisasetukset)
 * käyttäjä voi lisätä kommentteja tuloksiin
+
+## Sovelluksen asennus
+
+Asenna `flask`
+```
+$ pip install flask
+```
+Luo tietokanta
+```
+$sqlite3 database.db < schema.sql
+´´´
+
+Käynnistä sovellus:
+```
+$flask run
+```
+
+Sovelluksessa voi tällä hetkellä luoda käyttäjän , kirjautua sisään, kirjautua ulos. Tulosten lisääminen melkein toimii.
