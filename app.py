@@ -52,6 +52,11 @@ def login():
     else:
         return "ERROR: wrong username or password"
 
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
+
 @app.route("/submit_score")
 def submit_score():
     return render_template("submit_score.html")
