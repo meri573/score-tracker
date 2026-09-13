@@ -3,8 +3,10 @@ from flask import Flask
 from flask import redirect,render_template, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import db
+import config
 
 app = Flask(__name__)
+app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
