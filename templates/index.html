@@ -13,8 +13,12 @@
     You are logged in as {{ session.username }}
   </p>
   <p>
-    <a href="submit_score">Submit new score</a>
+    <a href="/submit_score">Submit new score</a>
   </p>
+  <p>
+    <a href="/logout">Logout</a>
+  </p>
+
   {% else %}
   <form action="/login" method="post">
     <p>
