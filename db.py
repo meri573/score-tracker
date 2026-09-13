@@ -11,3 +11,9 @@ def execute(sql, params=[]):
     result = con.execute(sql,params)
     con.commit()
     con.close()
+
+def query(sql, params=[]):
+    con = get_connection()
+    result = con.execute(sql, params).fetchall()
+    con.close()
+    return result
