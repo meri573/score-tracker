@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
-  [% for result in results %]
-  <p>
-    <a href="/result/{{ result.id}}"></a>
-    <br />
-    {{ result.username }}
-    <br />
-    {{ result.game }}
-    <br />
-    time: {{ result.result_time }} grade: {{ result.grade }} score: {{ result.score }}
-    <br />
-    extras:
-    <br />
-    {% if result.twentyg_mode %}
-    twenty g mode
-    {% if result.big_mode %}
-    big mode
-    <br>
-    { result.submitted_at }
+  {% for result in results %}
+  <body>
+    <p>
+      <a href="/result/{{ result.id}}"></a>
+      <br />
+      {{ result.username }}
+      <br />
+      {{ result.game }}
+      <br />
+      time: {{ result.result_time }} grade: {{ result.grade }} score: {{ result.score }}
+      <br />
+      extras:
+      <br />
+      {% if result.twentyg_mode %}
+        twenty g mode
+      {% endif %}  
+      {% if result.big_mode %}
+        big mode
+      {% endif %}
+      <br>
+      {{ result.submitted_at }}
+    </p>
 
-    submitted_at
-
-  </p>
-
-
-
+  </body>
+  {% endfor %}
 
 </html>
