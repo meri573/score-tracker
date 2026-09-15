@@ -44,9 +44,9 @@ def login():
 
     if check_password_hash(password_hash, password):
         session["username"] = username
-        # sql = "SELECT id FROM users WHERE username = ?"
-        # session["user_id"] = db.query(sql, [username])
-        # print(session["user_id"])
+        sql = "SELECT id FROM users WHERE username = ?"
+        session["user_id"] = db.query(sql, [username])[0][0]
+        print(session["user_id"])
 
         return redirect("/")
     else:
@@ -71,7 +71,7 @@ def result():
     twentyg_mode = 0 
     extras = request.form.getlist("extra")
     description = request.form["description"]
-    #user_id = session["user_id"]
+    user_id = session["user_id"]
 
     for extra in extras:
         if extra == "twentyg_mode":
@@ -79,8 +79,8 @@ def result():
         if extra == "big_mode":
             big_mode = 1
 
-    sql = "INSERT INTO results (game, result_time, score, grade, big_mode, twentyg_mode, result_description, submitted_at) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))"
-    db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description])
+    sql = "INSERT INTO results (game, result_time, score, grade, big_mode, twentyg_mode, result_description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
+    db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description, user_id])
 
-
+    print(game, time, grade, score, big_mode, twentyg_mode, description, user_id)
     return render_template("result.html", game=game, extras=extras, description=description)
