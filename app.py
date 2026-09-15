@@ -4,6 +4,7 @@ from flask import redirect,render_template, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import db
 import config
+import result_handler
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -56,6 +57,14 @@ def login():
 def logout():
     del session["username"]
     return redirect("/")
+
+@app.route("/results")
+def results():
+    results = result_handler.get_results()
+    return render_template("results.html",results=results)
+
+
+
 
 @app.route("/submit_score")
 def submit_score():
