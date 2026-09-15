@@ -7,12 +7,12 @@ CREATE TABLE users (
 CREATE TABLE results (
     id INTEGER PRIMARY KEY,
     game TEXT,
-    time TEXT,
-    grade TEXT
-    score INTEGER
+    result_time TEXT,
+    grade TEXT,
+    score INTEGER,
     big_mode INTEGER,
     twentyg_mode INTEGER,
-    description TEXT,
+    result_description TEXT,
     submitted_at TEXT,
     user_id INTEGER REFERENCES users
 )
