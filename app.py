@@ -61,8 +61,8 @@ def logout():
 def submit_score():
     return render_template("submit_score.html")
 
-@app.route("/result", methods=["POST"])
-def result():
+@app.route("/submission", methods=["POST"])
+def submission():
     game = request.form["game"]
     time = request.form["time"]
     grade = request.form["grade"]
@@ -83,4 +83,4 @@ def result():
     db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description, user_id])
 
     print(game, time, grade, score, big_mode, twentyg_mode, description, user_id)
-    return render_template("result.html", game=game, extras=extras, description=description)
+    return render_template("submission.html", game=game, extras=extras, description=description)
