@@ -38,15 +38,15 @@ def create():
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    user_id = ""
 
     sql = "SELECT password_hash FROM users WHERE username = ?"
     password_hash = db.query(sql,[username])[0][0]
 
     if check_password_hash(password_hash, password):
         session["username"] = username
-        #sql = "SELECT id FROM users WHERE username = ?"
-        #session["user_id"] = db.query(sql, [username])
+        # sql = "SELECT id FROM users WHERE username = ?"
+        # session["user_id"] = db.query(sql, [username])
+        # print(session["user_id"])
 
         return redirect("/")
     else:
@@ -79,7 +79,7 @@ def result():
         if extra == "big_mode":
             big_mode = 1
 
-    sql = "INSERT INTO results (game, time, grade, score, big_mode, twentyg_mode, description, submitted_at) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))"
+    sql = "INSERT INTO results (game, result_time, score, grade, big_mode, twentyg_mode, result_description, submitted_at) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))"
     db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description])
 
 
