@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  [% for result in results %]
+  <p>
+    <a href="/result/{{ result.id}}"></a>
+    <br />
+    {{ result.username }}
+    <br />
+    {{ result.game }}
+    <br />
+    time: {{ result.result_time }} grade: {{ result.grade }} score: {{ result.score }}
+    <br />
+    extras:
+    <br />
+    {% if result.twentyg_mode %}
+    twenty g mode
+    {% if result.big_mode %}
+    big mode
+    <br>
+    { result.submitted_at }
+
+    submitted_at
+
+  </p>
+
+
+
+
+</html>
