@@ -1,7 +1,7 @@
 import db
 
 def get_results():
-    sql = """SELECT u.username, r.id, r.game
+    sql = """SELECT u.username, r.id, r.game, r.result_time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
             FROM users u, results r  
             WHERE r.user_id = u.id"""
     print(sql)
