@@ -17,6 +17,10 @@ def get_result(result_id):
 
     return db.query(sql, [result_id])[0]
 
+def update_result(result_id, description):
+    sql = "UPDATE results SET description = ? WHERE id = ?"
+    db.execute(sql, [result_id, description])
+
 def delete_result(result_id):
     sql = "DELETE FROM results WHERE id = ?"
     db.execute(sql, [result_id])

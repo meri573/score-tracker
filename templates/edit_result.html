@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Editing submission</h2>
+        <form action="/update_item" method="post">
+            <p>
+                <label for="description">Description</label><br />
+                <textarea name="description" id="description" rows="3" cols="50" required>{{ result.description }}</textarea>
+            </p>
+            <input type="hidden" name="result_id" value="{{ result.id }}" />
+            <input type="submit" value="Update submission" />
+        </form>
+        <p>
+            <a href="/result/{{ result.id }}">back to result</a>
+        </p>
+    </body>
+</html>

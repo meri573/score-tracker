@@ -69,11 +69,6 @@ def result(result_id):
 
     return render_template("result.html", result=result)
 
-
-@app.route("/submit_score")
-def submit_score():
-    return render_template("submit_score.html")
-
 @app.route("/delete_result/<int:result_id>", methods=["GET", "POST"])
 def delete_result(result_id):
     result = result_handler.get_result(result_id)
@@ -85,6 +80,26 @@ def delete_result(result_id):
         if "remove" in request.form:
             result_handler.delete_result(result_id)
             return redirect("/")
+
+@app.route("/edit_result/<int:result_id>")
+def edit_result(result_id):
+    result = result_handler.get_result(result_id)
+
+    return render_template("edit_result", result=result)
+
+@app.rout("/update_result", methods="POST")
+def update_result():
+    result_id = request.form["result_id"]
+    # result = result_handler.get_result(result_id)
+
+    description = request.form[description]
+
+    result_handler.update_result(result_id, description)
+
+
+@app.route("/submit_score")
+def submit_score():
+    return render_template("submit_score.html")
 
 @app.route("/submission", methods=["POST"])
 def submission():
@@ -104,7 +119,7 @@ def submission():
         if extra == "big_mode":
             big_mode = 1
 
-    sql = "INSERT INTO results (game, result_time, score, grade, big_mode, twentyg_mode, result_description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
+    sql = "INSERT INTO results (game, time, score, grade, big_mode, twentyg_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
     db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description, user_id])
 
     print(game, time, grade, score, big_mode, twentyg_mode, description, user_id)
