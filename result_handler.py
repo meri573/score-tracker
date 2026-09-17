@@ -19,7 +19,7 @@ def get_result(result_id):
 
 def update_result(result_id, description):
     sql = "UPDATE results SET description = ? WHERE id = ?"
-    db.execute(sql, [result_id, description])
+    db.execute(sql, [description, result_id])
 
 def delete_result(result_id):
     sql = "DELETE FROM results WHERE id = ?"
