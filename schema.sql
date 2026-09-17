@@ -15,4 +15,4 @@ CREATE TABLE results (
     result_description TEXT,
     submitted_at TEXT,
     user_id INTEGER REFERENCES users
-)
+);
