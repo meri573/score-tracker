@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html>
-  {% for thing in result %}
   <body>
+    {% if session.username == result.username %}
+    <p style="text-align:right">
+      <a href="/edit_result/result.id">Edit submission </a> &nbsp;
+      <a href="/delete_result/result.id">Delete submission</a>
+    </p>
+
+    {% endif %}
+
     <p>
       <br />
-      {{ thing.username }}
+      {{ result.username }}
       <br />
-      {{ thing.game }}
+      {{ result.game }}
       <br />
-      time: {{ thing.result_time }} grade: {{ thing.grade }} score: {{ thing.score }}
+      time: {{ result.result_time }} grade: {{ result.grade }} score: {{ result.score }}
       <br />
       extras:
       <br />
-      {% if thing.twentyg_mode %}
+      {% if result.twentyg_mode %}
         twenty g mode
       {% endif %}  
-      {% if thing.big_mode %}
+      {% if result.big_mode %}
         big mode
       {% endif %}
-      <br>
-      {{ thing.submitted_at }}
+      <br />
+      description from submitter:
+      <br />
+      {{ result.result_description }}
+      <br />
+      score submitted at: {{ result.submitted_at }}
     </p>
 
   </body>
-  {% endfor %}
 
 </html>
