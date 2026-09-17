@@ -85,16 +85,18 @@ def delete_result(result_id):
 def edit_result(result_id):
     result = result_handler.get_result(result_id)
 
-    return render_template("edit_result", result=result)
+    return render_template("edit_result.html", result=result)
 
-@app.rout("/update_result", methods="POST")
+@app.route("/update_result", methods=["POST"])
 def update_result():
     result_id = request.form["result_id"]
     # result = result_handler.get_result(result_id)
 
-    description = request.form[description]
+    description = request.form["description"]
 
     result_handler.update_result(result_id, description)
+
+    return redirect("/results")
 
 
 @app.route("/submit_score")
