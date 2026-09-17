@@ -10,5 +10,10 @@ def get_results():
 
     return db.query(sql)
 
+def get_result(result_id):
+    sql = """SELECT u.username, r.id, r.game, r.result_time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at, r.result_description
+            FROM users u, results r  
+            WHERE r.user_id = u.id AND r.id = ?"""
 
-#, r.result_time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at r.user_id 
+    return db.query(sql, [result_id])
+    
