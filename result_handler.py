@@ -15,7 +15,7 @@ def get_result(result_id):
             FROM users u, results r  
             WHERE r.user_id = u.id AND r.id = ?"""
 
-    return db.query(sql, [result_id])
+    return db.query(sql, [result_id])[0]
 
 def delete_result(result_id):
     sql = "DELETE FROM results WHERE id = ?"
