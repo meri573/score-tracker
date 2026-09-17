@@ -63,6 +63,16 @@ def results():
     results = result_handler.get_results()
     return render_template("results.html",results=results)
 
+@app.route("/result/<int:result_id>")
+def result(result_id):
+    print(result_id)
+    result = result_handler.get_result(result_id)
+    print(result)
+    for thing in result:
+        print(thing[0])
+
+    return render_template("result.html", result=result)
+
 
 
 
