@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Are you sure you want to delete this submission</h2>
+        <form action="/delete_result/{{ result.id }}" method="post">
+            <input type="submit" name="remove" value="Remove submission">
+        </form>
+        <p>
+            <a href="/result/{{ result.id }}">Back to result</a>
+        </p>
+    </body>
+
+</html>
