@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  {% for thing in result %}
+  <body>
+    <p>
+      <br />
+      {{ thing.username }}
+      <br />
+      {{ thing.game }}
+      <br />
+      time: {{ thing.result_time }} grade: {{ thing.grade }} score: {{ thing.score }}
+      <br />
+      extras:
+      <br />
+      {% if thing.twentyg_mode %}
+        twenty g mode
+      {% endif %}  
+      {% if thing.big_mode %}
+        big mode
+      {% endif %}
+      <br>
+      {{ thing.submitted_at }}
+    </p>
+
+  </body>
+  {% endfor %}
+
+</html>
