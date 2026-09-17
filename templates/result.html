@@ -3,8 +3,8 @@
   <body>
     {% if session.username == result.username %}
     <p style="text-align:right">
-      <a href="/edit_result/result.id">Edit submission </a> &nbsp;
-      <a href="/delete_result/result.id">Delete submission</a>
+      <a href="/edit_result/{{ result.id }}">Edit submission </a> &nbsp;
+      <a href="/delete_result/{{ result.id }}">Delete submission</a>
     </p>
 
     {% endif %}
