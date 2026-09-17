@@ -67,14 +67,24 @@ def results():
 def result(result_id):
     result = result_handler.get_result(result_id)
 
-    return render_template("result.html", result=result[0])
-
-
+    return render_template("result.html", result=result)
 
 
 @app.route("/submit_score")
 def submit_score():
     return render_template("submit_score.html")
+
+@app.route("/delete_result/<int:result_id>", methods=["GET", "POST"])
+def delete_result(result_id):
+    result = result_handler.get_result(result_id)
+
+    if request.method == "GET":
+        return render_template("delete_result.html", result=result)
+
+    if request.method == "POST":
+        if "remove" in request.form:
+            result_handler.delete_result(result_id)
+            return redirect("/")
 
 @app.route("/submission", methods=["POST"])
 def submission():
