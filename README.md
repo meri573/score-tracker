@@ -28,4 +28,4 @@ Käynnistä sovellus:
 $flask run
 ```
 
-Sovelluksessa voi tällä hetkellä luoda käyttäjän , kirjautua sisään, kirjautua ulos. Tulosten lisääminen melkein toimii.
+Sovelluksessa voi tällä hetkellä luoda käyttäjän , kirjautua sisään, kirjautua ulos, lisätä tuloksen, katsella tuloksia, editoida omia tuloksia, poistaa omia tuloksia ja etsiä tuloksia
