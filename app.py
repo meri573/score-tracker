@@ -33,7 +33,7 @@ def create():
     except sqlite3.IntegrityError:
         return "ERROR: username already exists"
 
-    return "Account created"
+    return redirect("/")
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -134,4 +134,4 @@ def submission():
     db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description, user_id])
 
     print(game, time, grade, score, big_mode, twentyg_mode, description, user_id)
-    return render_template("submission.html", game=game, extras=extras, description=description)
+    return redirect("/results")
