@@ -98,6 +98,15 @@ def update_result():
 
     return redirect("/results")
 
+@app.route("/search_results")
+def search_results():
+    query = request.args.get("query")
+    if query:
+        results = result_handler.search_results(query)
+    else:
+        query = ""
+        results = []
+    return render_template("search_results.html", query=query, results=results)
 
 @app.route("/submit_score")
 def submit_score():
