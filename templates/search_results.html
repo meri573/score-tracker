@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+    <body>
+        <h2>Search results</h2>
+        <form action="/search_results" method="get">
+        <p>
+            <label for="query">Search term</label>
+            <input type="text" name="query" id="query" value="{{ query }}">
+        </p>
+        </form>
+
+        {% if query %}
+        <h3>Search results</h3>
+
+        <ul>
+            {% for result in results %}
+            <li><a href="/result/{{ result.id }}">details</a>
+            <br />
+            {{ result.username }}
+            <br />
+            {{ result.game }}
+            <br />
+            time: {{ result.time }} grade: {{ result.grade }} score: {{ result.score }}
+            <br />
+            extras:
+            <br />
+            {% if result.twentyg_mode %}
+                twenty g mode
+            {% endif %}  
+            {% if result.big_mode %}
+                big mode
+            {% endif %}
+            <br>
+            {{ result.submitted_at }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </body>
+</html>
