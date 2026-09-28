@@ -1,8 +1,9 @@
 import sqlite3
 import secrets
+import re
 
 from flask import Flask
-from flask import redirect,render_template, request, session
+from flask import redirect,render_template, request, session, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import db
@@ -12,6 +13,10 @@ import users
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
+
+def require_login():
+    if "user_id" not in session:
+        abort(403)
 
 @app.route("/")
 def index():
@@ -29,7 +34,6 @@ def create():
     password2 = request.form["password2"]
     if password1 != password2:
         return "ERROR: passwords don't match"
-    
     try:
         users.create_user(username, password1)
     except sqlite3.IntegrityError:
