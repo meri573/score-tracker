@@ -11,11 +11,12 @@ def get_results():
     return db.query(sql)
 
 def get_result(result_id):
-    sql = """SELECT u.username, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at, r.description
+    sql = """SELECT u.username, r.user_id, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at, r.description
             FROM users u, results r  
             WHERE r.user_id = u.id AND r.id = ?"""
 
-    return db.query(sql, [result_id])[0]
+    result = db.query(sql, [result_id])
+    return result[0] if result else None
 
 def update_result(result_id, description):
     sql = "UPDATE results SET description = ? WHERE id = ?"
