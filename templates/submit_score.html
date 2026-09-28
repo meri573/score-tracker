@@ -52,6 +52,7 @@
     </p>
     <p>Description</p>
       <textarea name="description" rows="3" cols="50"></textarea>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" value="Submit" />
   </form>
 </body>

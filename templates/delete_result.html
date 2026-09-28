@@ -3,6 +3,7 @@
     <body>
         <h2>Are you sure you want to delete this submission</h2>
         <form action="/delete_result/{{ result.id }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
             <input type="submit" name="remove" value="Remove submission">
         </form>
         <p>
