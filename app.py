@@ -18,6 +18,13 @@ def require_login():
     if "user_id" not in session:
         abort(403)
 
+def check_csrf():
+    if "csrf_token" not in request.form:
+        abort(403)
+    if request.form["csrf_token"] != session["csrf_token"]:
+        abort(403)
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -58,6 +65,7 @@ def login():
 @app.route("/logout")
 def logout():
     del session["username"]
+    del session["user_id"]
     return redirect("/")
 
 @app.route("/results")
@@ -85,16 +93,30 @@ def delete_result(result_id):
 
 @app.route("/edit_result/<int:result_id>")
 def edit_result(result_id):
+    require_login()
     result = result_handler.get_result(result_id)
-
+    if not result:
+        abort(404)
+    if result["user_id"] != session["user_id"]:
+        abort(403)
+    
     return render_template("edit_result.html", result=result)
 
 @app.route("/update_result", methods=["POST"])
 def update_result():
+    require_login()
+    check_csrf()
+
     result_id = request.form["result_id"]
-    # result = result_handler.get_result(result_id)
+    result = result_handler.get_result(result_id)
+    if not result:
+        abort(404)
+    if result["user_id"] != session["user_id"]:
+        abort(403)
 
     description = request.form["description"]
+    if not description or len(description) >200:
+        abort(403)
 
     result_handler.update_result(result_id, description)
 
@@ -116,6 +138,9 @@ def submit_score():
 
 @app.route("/submission", methods=["POST"])
 def submission():
+    require_login()
+    check_csrf
+
     game = request.form["game"]
     time = request.form["time"]
     grade = request.form["grade"]
@@ -140,7 +165,8 @@ def submission():
         abort(403)
     if not score:
         abort(403)
-
+    if description and len(description) >200:
+        abort(403)
 
     sql = "INSERT INTO results (game, time, score, grade, big_mode, twentyg_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
     db.execute(sql, [game, time, score, grade, big_mode, twentyg_mode, description, user_id])
