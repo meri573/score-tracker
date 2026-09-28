@@ -1,10 +1,14 @@
 import sqlite3
+import secrets
+
 from flask import Flask
 from flask import redirect,render_template, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
+
 import db
 import config
 import result_handler
+import users
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -25,11 +29,9 @@ def create():
     password2 = request.form["password2"]
     if password1 != password2:
         return "ERROR: passwords don't match"
-    password_hash = generate_password_hash(password1)
-
+    
     try:
-        sql = "INSERT INTO users (username, password_hash) VALUES (?,?)"
-        db.execute(sql, [username, password_hash])
+        users.create_user(username, password1)
     except sqlite3.IntegrityError:
         return "ERROR: username already exists"
 
@@ -40,15 +42,11 @@ def login():
     username = request.form["username"]
     password = request.form["password"]
 
-    sql = "SELECT password_hash FROM users WHERE username = ?"
-    password_hash = db.query(sql,[username])[0][0]
-
-    if check_password_hash(password_hash, password):
+    user_id = users.check_login(username, password)
+    if user_id:
         session["username"] = username
-        sql = "SELECT id FROM users WHERE username = ?"
-        session["user_id"] = db.query(sql, [username])[0][0]
-        print(session["user_id"])
-
+        session["user_id"] = user_id
+        session["csrf_token"] = secrets.token_hex(16)
         return redirect("/")
     else:
         return "ERROR: wrong username or password"
