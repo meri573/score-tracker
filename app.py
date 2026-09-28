@@ -168,11 +168,11 @@ def submission():
 
     if not re.search("Tetris: The Grand Master 1|2|3", game):
         abort(403)
-    if not time:
+    if not time or len(time) > 20:
         abort(403)
-    if not grade:
+    if not grade: #regex 1-9 or S + 1-9 or Gm
         abort(403)
-    if not score:
+    if not score or len(score) > 20:
         abort(403)
     if description and len(description) >200:
         abort(403)
