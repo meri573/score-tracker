@@ -76,6 +76,8 @@ def results():
 @app.route("/result/<int:result_id>")
 def result(result_id):
     result = result_handler.get_result(result_id)
+    if not result:
+        abort(404)
 
     return render_template("result.html", result=result)
 
