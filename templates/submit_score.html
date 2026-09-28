@@ -15,11 +15,11 @@
     </p>
     <p>Time</p>
     <p>
-      <input type="text" name="time" required />
+      <input type="text" name="time" maxlength="20" required />
     </p>
     <p>Score</p>
     <p>
-      <input type="number" name="score" required />
+      <input type="number" name="score" maxlength="20" required />
     </p>
     <p>Grade</p>
     <p>
@@ -51,7 +51,7 @@
       <input type="checkbox" name="extra" value="big_mode" /> Big mode
     </p>
     <p>Description</p>
-      <textarea name="description" rows="3" cols="50"></textarea>
+      <textarea name="description" rows="3" cols="50" maxlength="200"></textarea>
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" value="Submit" />
   </form>

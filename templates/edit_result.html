@@ -5,7 +5,7 @@
         <form action="/update_result" method="post">
             <p>
                 <label for="description">Description</label><br />
-                <textarea name="description" id="description" rows="3" cols="50" required>{{ result.description }}</textarea>
+                <textarea name="description" id="description" rows="3" cols="50" maxlength="200" required>{{ result.description }}</textarea>
             </p>
             <input type="hidden" name="result_id" value="{{ result.id }}" />
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
