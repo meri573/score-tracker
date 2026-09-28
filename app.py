@@ -132,6 +132,16 @@ def submission():
         if extra == "big_mode":
             big_mode = 1
 
+    if not re.search("Tetris: The Grand Master 1|2|3", game):
+        abort(403)
+    if not time:
+        abort(403)
+    if not grade:
+        abort(403)
+    if not score:
+        abort(403)
+
+
     sql = "INSERT INTO results (game, time, score, grade, big_mode, twentyg_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
     db.execute(sql, [game, time, score, grade, big_mode, twentyg_mode, description, user_id])
 
