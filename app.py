@@ -133,7 +133,6 @@ def submission():
             big_mode = 1
 
     sql = "INSERT INTO results (game, time, score, grade, big_mode, twentyg_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
-    db.execute(sql, [game, time, grade, score, big_mode, twentyg_mode, description, user_id])
+    db.execute(sql, [game, time, score, grade, big_mode, twentyg_mode, description, user_id])
 
-    print(game, time, grade, score, big_mode, twentyg_mode, description, user_id)
     return redirect("/results")
