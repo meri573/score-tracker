@@ -81,12 +81,19 @@ def result(result_id):
 
 @app.route("/delete_result/<int:result_id>", methods=["GET", "POST"])
 def delete_result(result_id):
+    require_login()
+
     result = result_handler.get_result(result_id)
+    if not result:
+        abort(404)
+    if result["user_id"] != session["user_id"]:
+        abort(403)
 
     if request.method == "GET":
         return render_template("delete_result.html", result=result)
 
     if request.method == "POST":
+        check_csrf()
         if "remove" in request.form:
             result_handler.delete_result(result_id)
             return redirect("/")
