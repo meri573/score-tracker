@@ -1,12 +1,9 @@
 import db
 
 def get_results():
-    sql = """SELECT u.username, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
+    sql = """SELECT u.username, r.user_id, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
             FROM users u, results r  
             WHERE r.user_id = u.id"""
-    print(sql)
-    temp = db.query(sql)
-    print(temp)
 
     return db.query(sql)
 
