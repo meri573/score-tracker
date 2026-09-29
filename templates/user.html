@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <h2>User {{ user.username }}</h2>
+    
+    <p>
+        User has submitted {{ results | count }} results
+    </p>
+
+    {% for result in results %}
+    <ul>
+      <li>
+
+        <a href="/result/{{ result.id }}">details</a>
+        {{ result.game }}
+        <br />
+        time: {{ result.time }} grade: {{ result.grade }} score: {{ result.score }}
+        <br />
+        extras:
+        <br />
+        {% if result.twentyg_mode %}
+          twenty g mode
+        {% endif %}  
+        {% if result.big_mode %}
+          big mode
+        {% endif %}
+        <br>
+        {{ result.submitted_at }}
+      </li>
+    </ul>
+    {% endfor %}
+    </body>
+</html>

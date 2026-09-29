@@ -48,6 +48,15 @@ def create():
 
     return redirect("/")
 
+@app.route("/user/<int:user_id>")
+def user(user_id):
+    user = users.get_user(user_id)
+    if not user:
+        abort(404)
+    results = users.get_results(user_id)
+    return render_template("user.html", user=user, results=results)
+
+
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
