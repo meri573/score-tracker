@@ -4,9 +4,10 @@
     <h2>User {{ user.username }}</h2>
     
     <p>
-        User has submitted {{ results | count }} result(s)
+        User has submitted {{ results | count }} result(s) and {{ user_comments | count }} comment(s).
     </p>
 
+    Results submitted by {{ user.username }}
     {% for result in results %}
     <ul>
       <li>
@@ -31,7 +32,7 @@
     {% endfor %}
 
     <p>
-      Comments made by User
+      Comments made by {{ user.username }}
     </p>
     {% for comment in user_comments %}
     <ul>
