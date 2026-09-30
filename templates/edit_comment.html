@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Editing submission</h2>
+        <form action="/update_comment" method="post">
+            <p>
+                <label for="content">Comment content</label><br />
+                <textarea name="content" id="content" rows="3" cols="50" maxlength="200" required>{{ comment.content }}</textarea>
+            </p>
+            <input type="hidden" name="comment_id" value="{{ comment.id }}" />
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+            <input type="submit" value="Update comment" />
+        </form>
+        <p>
+            <a href="/result/{{ comment.result_id }}">back to result</a>
+        </p>
+    </body>
+</html>
