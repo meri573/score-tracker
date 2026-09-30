@@ -10,6 +10,7 @@ import db
 import config
 import result_handler
 import users
+import comments
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -149,6 +150,21 @@ def search_results():
         query = ""
         results = []
     return render_template("search_results.html", query=query, results=results)
+
+@app.route("/new_comment", methods=["POST"])
+def new_comment():
+    require_login()
+    check_csrf()
+    
+    content = request.form["content"]
+    if len(content) > 200:
+        abort(403)    
+    result_id = request.form["result_id"]
+    user_id = session["user_id"]
+
+
+    comments.add_comment(result_id, content, user_id)
+    return redirect("/result/" + result_id)
 
 @app.route("/submit_score")
 def submit_score():
