@@ -16,3 +16,11 @@ CREATE TABLE results (
     submitted_at TEXT,
     user_id INTEGER REFERENCES users
 );
+
+CREATE TABLE comments (
+    id INTEGER PRIMARY KEY,
+    content TEXT,
+    sent_at TEXT,
+    user_id INTEGER REFERENCES users,
+    result_id INTEGER REFERENCES results
+);
