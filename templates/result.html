@@ -43,8 +43,18 @@
     <p>
       Comments
     </p>
-
+    {% for comment in result_comments %}
     
+    <ul>
+      <li>
+        <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a>
+        <br />
+        {{ comment.content }}
+        <br />
+        Sent at: {{ comment.sent_at }} 
+      </li>
+    </ul>
+    {% endfor %}
 
   </body>
 

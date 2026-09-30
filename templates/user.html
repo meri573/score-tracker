@@ -4,7 +4,7 @@
     <h2>User {{ user.username }}</h2>
     
     <p>
-        User has submitted {{ results | count }} results
+        User has submitted {{ results | count }} result(s)
     </p>
 
     {% for result in results %}
@@ -26,6 +26,21 @@
         {% endif %}
         <br>
         {{ result.submitted_at }}
+      </li>
+    </ul>
+    {% endfor %}
+
+    <p>
+      Comments made by User
+    </p>
+    {% for comment in user_comments %}
+    <ul>
+      <li>
+        <a href="/result/{{comment.result_id}}">Result</a>
+        <br />
+        {{ comment.content }}
+        <br />
+        Sent at: {{ comment.sent_at }}
       </li>
     </ul>
     {% endfor %}
