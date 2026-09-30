@@ -171,6 +171,60 @@ def new_comment():
     comments.add_comment(result_id, content, user_id)
     return redirect("/result/" + str(result_id))
 
+@app.route("/edit_comment/<int:comment_id>")
+def edit_comment(comment_id):
+    require_login
+    comment = comments.get_comment(comment_id)
+    if not comment:
+        abort(404)
+    if comment["user_id"] != session["user_id"]:
+        abort(403)
+
+    return render_template("edit_comment.html", comment=comment)
+
+@app.route("/update_comment", methods=["POST"])
+def update_comment():
+    require_login()
+    check_csrf()
+
+    comment_id = int(request.form["comment_id"])
+    comment = comments.get_comment(comment_id)
+    if not result:
+        abort(404)
+    if comment["user_id"] != session["user_id"]:
+        abort(403)
+
+    content = request.form["content"]
+    if not content or len(content) >200:
+        abort(403)
+
+    print(comment_id)
+    print(content)
+    comments.update_comment(comment_id, content)
+
+    return redirect("/result/" + str(comment["result_id"]))
+
+
+@app.route("/delete_comment/<int:comment_id>", methods=["GET", "POST"])
+def delete_comment(comment_id):
+    require_login()
+
+    comment = comments.get_comment(comment_id)
+    if not comment:
+        abort(404)
+    if comment["user_id"] != session["user_id"]:
+        abort(403)
+
+    if request.method == "GET":
+        return render_template("delete_comment.html", comment=comment)
+
+    if request.method == "POST":
+        check_csrf()
+        if "remove" in request.form:
+            comments.delete_comment(comment_id)
+            return redirect("/result/" + str(comment["result_id"]))
+
+
 @app.route("/submit_score")
 def submit_score():
     return render_template("submit_score.html")
