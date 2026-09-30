@@ -55,7 +55,10 @@ def user(user_id):
     if not user:
         abort(404)
     results = users.get_results(user_id)
-    return render_template("user.html", user=user, results=results)
+    user_comments = comments.get_user_comments(user_id)
+    if not user_comments:
+        user_comments = []
+    return render_template("user.html", user=user, results=results, user_comments=user_comments)
 
 
 @app.route("/login", methods=["POST"])
@@ -88,8 +91,11 @@ def result(result_id):
     result = result_handler.get_result(result_id)
     if not result:
         abort(404)
+    result_comments = comments.get_comments(result_id)
+    if not result_comments:
+        result_comments = []
 
-    return render_template("result.html", result=result)
+    return render_template("result.html", result=result, result_comments=result_comments)
 
 @app.route("/delete_result/<int:result_id>", methods=["GET", "POST"])
 def delete_result(result_id):
@@ -159,12 +165,11 @@ def new_comment():
     content = request.form["content"]
     if len(content) > 200:
         abort(403)    
-    result_id = request.form["result_id"]
+    result_id = int(request.form["result_id"])
     user_id = session["user_id"]
 
-
     comments.add_comment(result_id, content, user_id)
-    return redirect("/result/" + result_id)
+    return redirect("/result/" + str(result_id))
 
 @app.route("/submit_score")
 def submit_score():
