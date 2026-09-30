@@ -32,6 +32,19 @@
       <br />
       score submitted at: {{ result.submitted_at }}
     </p>
+    
+    <form action="/new_comment" method="post">
+      <p>Add new comment</p>
+      <textarea name="content" rows="3" cols="50" maxlength="200" required></textarea>
+      <input type="hidden" name="result_id" value="{{ result.id }}" />
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+      <input type="submit" value="submit" />
+    </form>
+    <p>
+      Comments
+    </p>
+
+    
 
   </body>
 
