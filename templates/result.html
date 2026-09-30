@@ -47,11 +47,17 @@
     
     <ul>
       <li>
+        
         <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a>
         <br />
         {{ comment.content }}
         <br />
-        Sent at: {{ comment.sent_at }} 
+        Sent at: {{ comment.sent_at }}
+        {% if session.user_id == comment.user_id %}
+        <br />
+        <a href="/edit_comment/{{ comment.id }}">Edit</a>
+        <a href="/delete_comment/{{ comment.id }}">Delete</a>
+        {% endif %} 
       </li>
     </ul>
     {% endfor %}
