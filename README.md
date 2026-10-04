@@ -49,5 +49,7 @@ Sovelluksessa voi tällä hetkellä
 * etsiä tuloksia
 * vierailla käyttäjäsivulla
 * lisätä kommentteja tulokselle
+
+* loukittelujen oikein tekeminen on vielä työn alla
 * editoida kommentteja
 * poistaa kommentteja
