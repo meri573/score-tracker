@@ -227,12 +227,14 @@ def delete_comment(comment_id):
 
 @app.route("/submit_score")
 def submit_score():
-    return render_template("submit_score.html")
+    classes = result_handler.get_all_classes()
+    return render_template("submit_score.html", classes=classes)
 
 @app.route("/submission", methods=["POST"])
 def submission():
     require_login()
-    check_csrf
+    check_csrf()
+
 
     game = request.form["game"]
     time = request.form["time"]
@@ -244,24 +246,50 @@ def submission():
     description = request.form["description"]
     user_id = session["user_id"]
 
-    for extra in extras:
-        if extra == "twentyg_mode":
-            twentyg_mode = 1
-        if extra == "big_mode":
-            big_mode = 1
+    all_classes = result_handler.get_all_classes()
 
-    if not re.search("Tetris: The Grand Master 1|2|3", game):
-        abort(403)
+    print(request.form.getlist("extras"))
+
+    classes = []
+    temp_classes = [request.form["game"], request.form["grade"], request.form["rule"]]
+    temp_classes.extend(request.form.getlist("extras"))
+    for entry in temp_classes:
+        if entry:
+            class_title, class_value = entry.split(":")
+            if class_title not in all_classes:
+                abort(403)
+            if class_value not in all_classes[class_title]:
+                abort(403)
+            classes.append((class_title, class_value))
+        else:
+            abort(403)
+
+    #for extra in request.form.getlist("extras"):
+    #    print(extra)
+    #    if extra:
+    #        class_title, class_value = entry.split(":")
+    #        if class_title not in all_classes:
+    #            abort(403)
+    #        if class_value not in all_classes[class_title]:
+    #            abort(403)
+    #        classes.append((class_title, class_value))
+
+    print(classes)
+
+    #if not re.search("tgm1|2|3", game):
+    #    abort(403)
     if not time or len(time) > 20:
         abort(403)
-    if not grade: #regex 1-9 or S + 1-9 or Gm
-        abort(403)
+    #if not grade: #regex 1-9 or S + 1-9 or Gm
+    #    abort(403)
     if not score or len(score) > 20:
         abort(403)
     if description and len(description) >200:
         abort(403)
 
-    sql = "INSERT INTO results (game, time, score, grade, big_mode, twentyg_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
-    db.execute(sql, [game, time, score, grade, big_mode, twentyg_mode, description, user_id])
+    result_handler.add_result(time, score, description, user_id, classes)
+
+    #sql = "INSERT INTO results (game, time, score, grade, big_mode, twentyg_mode, description, submitted_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)"
+    #db.execute(sql, [game, time, score, grade, big_mode, twentyg_mode, description, user_id])
 
     return redirect("/results")
