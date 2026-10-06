@@ -24,3 +24,16 @@ CREATE TABLE comments (
     user_id INTEGER REFERENCES users,
     result_id INTEGER REFERENCES results
 );
+
+CREATE TABLE classes (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    value TEXT
+);
+
+CREATE TABLE result_classes (
+    id INTEGER PRIMARY KEY,
+    result_id INTEGER REFERENCES results,
+    title TEXT,
+    value TEXT
+);
