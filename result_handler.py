@@ -34,6 +34,8 @@ def update_result(result_id, description):
 def delete_result(result_id):
     sql = "DELETE FROM results WHERE id = ?"
     db.execute(sql, [result_id])
+    sql = "DELETE FROM result_classes WHERE result_id = ?"
+    db.execute(sql, [result_id])
 
 def search_results(query):
     sql = """SELECT u.username, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
