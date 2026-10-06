@@ -28,9 +28,10 @@ Asenna `flask`
 ```
 $ pip install flask
 ```
-Luo tietokanta
+Luo tietokanta ja lisää luokat siihen `init.sql` tiedostosta
 ```
 $ sqlite3 database.db < schema.sql
+$ sqlite3 database.db < init.sql
 ```
 
 Käynnistä sovellus:
@@ -50,6 +51,6 @@ Sovelluksessa voi tällä hetkellä
 * vierailla käyttäjäsivulla
 * lisätä kommentteja tulokselle
 
-* loukittelujen oikein tekeminen on vielä työn alla
+* loukittelujen oikein tekeminen on vielä työn alla, joten projekti ei välttämättä toimi oiken tällä hetkellä
 * editoida kommentteja
 * poistaa kommentteja
