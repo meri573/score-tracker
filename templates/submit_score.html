@@ -7,11 +7,13 @@
 
 <body>
   <form action="/submission" method="post">
-    <p>Game version</p>
     <p>
-      <input type="radio" name="game" value="Tetris: The Grand Master 1" /> Tetris: The Grand Master 1
-      <input type="radio" name="game" value="Tetris: The Grand Master 2" /> Tetris: The Grand Master 2 
-      <input type="radio" name="game" value="Tetris: The Grand Master 3" /> Tetris: The Grand Master 3
+      <label for="game">Game version</label> <br />
+      <select name="game" id="game">
+        {% for option in classes["game"] %}
+        <option value="game:{{ option }}">{{ option }}</option> 
+        {% endfor %}
+      </select>
     </p>
     <p>Time</p>
     <p>
@@ -22,34 +24,30 @@
       <input type="number" name="score" maxlength="20" required />
     </p>
     <p>Grade</p>
-    <p>
+ <p>
+      <label for="grade">Grade</label> <br />
       <select name="grade" id="grade">
-        <option value="Gm">Gm</option>
-        <option value="S9">S9</option>
-        <option value="S8">S8</option>
-        <option value="S7">S7</option>
-        <option value="S6">S6</option>
-        <option value="S5">S5</option>
-        <option value="S4">S4</option>
-        <option value="S3">S3</option>
-        <option value="S2">S2</option>
-        <option value="S1">S1</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
+        {% for option in classes["grade"] %}
+        <option value="grade:{{ option }}">{{ option }}</option> 
+        {% endfor %}
       </select>
     </p>
     <p>Additional options</p>
     <p>
-      <input type="checkbox" name="extra" value="twentyg_mode" /> 20G mode
-      <input type="checkbox" name="extra" value="big_mode" /> Big mode
+      <label for="extras">extras</label> <br />
+      {% for option in classes["extras"] %}
+      <input type="checkbox" name="extras" value="extras:{{ option }}" /> {{ option }}
+      {% endfor %}
     </p>
+    <p>
+      <label for="rule">rule</label> <br />
+      <select name="rule" id="rule">
+        {% for option in classes["rule"] %}
+        <option value="rule:{{ option }}">{{ option }}</option>
+        {% endfor %}
+      </select>
+    </p>    
+    
     <p>Description</p>
     <textarea name="description" rows="3" cols="50" maxlength="200"></textarea>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
