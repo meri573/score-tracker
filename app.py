@@ -91,11 +91,12 @@ def result(result_id):
     result = result_handler.get_result(result_id)
     if not result:
         abort(404)
+    classes = result_handler.get_classes(result_id)
     result_comments = comments.get_comments(result_id)
     if not result_comments:
         result_comments = []
 
-    return render_template("result.html", result=result, result_comments=result_comments)
+    return render_template("result.html", result=result, result_comments=result_comments, classes=classes)
 
 @app.route("/delete_result/<int:result_id>", methods=["GET", "POST"])
 def delete_result(result_id):
