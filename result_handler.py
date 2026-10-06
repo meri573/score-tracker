@@ -15,6 +15,18 @@ def get_result(result_id):
     result = db.query(sql, [result_id])
     return result[0] if result else None
 
+def add_result(time, score, description, user_id, classes):
+    sql = """INSERT INTO results (time, score, description, submitted_at, user_id) 
+            VALUES (?, ?, ?, datetime('now'), ?)"""
+    db.execute(sql, [time, score, description, user_id])
+
+    result_id = db.las_insert_id()
+
+    sql = "INSERT INTO result_classes (result_id, title, value) VALUES (?,?,?)"
+    for class_title, class_value in classes:
+        print(class_title, class_value)
+        db.execute(sql, [result_id, class_title, class_value])
+
 def update_result(result_id, description):
     sql = "UPDATE results SET description = ? WHERE id = ?"
     db.execute(sql, [description, result_id])
@@ -29,3 +41,22 @@ def search_results(query):
             WHERE r.user_id = u.id AND (u.username LIKE ? OR r.game LIKE ? OR r.time LIKE ? OR r.grade LIKE ? OR r.score LIKE ? OR r.submitted_at LIKE ?)"""
     like = "%" + query + "%"
     return db.query(sql, [like, like, like, like, like, like])
+
+def get_all_classes():
+    sql = "SELECT title, value FROM classes ORDER BY id"
+    result = db.query(sql)
+
+    classes = {}
+    for title, value in result:
+        classes[title]=[]
+    for title, value in result:
+        classes[title].append(value)
+
+    print(classes["rule"])
+    print(classes["game"])
+
+    return classes
+
+def get_classes(result_id):
+    sql = "SELECT title, value FROM result_classes WHERE result_id = ?"
+    return db.query(sql, [result_id])
