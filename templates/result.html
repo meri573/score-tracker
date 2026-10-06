@@ -13,17 +13,16 @@
       <br />
       <a href="/user/{{ result.user_id }}">{{ result.username }}</a>
       <br />
-      {{ result.game }}
+      {{ classes["game"][0] }}
       <br />
-      time: {{ result.time }} grade: {{ result.grade }} score: {{ result.score }}
+      time: {{ result.time }} grade: {{ classes["grade"][0] }} score: {{ result.score }}
       <br />
       extras:
       <br />
-      {% if result.twentyg_mode %}
-        twenty g mode
-      {% endif %}  
-      {% if result.big_mode %}
-        big mode
+      {% if classes["extras"] %}
+        {% for extras in classes["extras"] %}
+          {{ extras }} <br />
+        {% endfor %}
       {% endif %}
       <br />
       description from submitter:
