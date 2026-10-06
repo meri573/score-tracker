@@ -14,18 +14,42 @@
 
 ## Sovelluksen asennus
 
+Kloonaa repositorio
+```
+$ git clone git@github.com:meri573/score-tracker.git
+```
+Luo virtuaaliympäristö ja aktivoi se
+```
+$ python3 -m venv venv
+$ source venv/bin/activate
+```
+
 Asenna `flask`
 ```
 $ pip install flask
 ```
 Luo tietokanta
 ```
-$sqlite3 database.db < schema.sql
-´´´
+$ sqlite3 database.db < schema.sql
+```
 
 Käynnistä sovellus:
 ```
-$flask run
+$ flask run
 ```
 
-Sovelluksessa voi tällä hetkellä luoda käyttäjän , kirjautua sisään, kirjautua ulos, lisätä tuloksen, katsella tuloksia, editoida omia tuloksia, poistaa omia tuloksia ja etsiä tuloksia
+Sovelluksessa voi tällä hetkellä 
+* luoda käyttäjän 
+* kirjautua sisään 
+* kirjautua ulos 
+* lisätä tuloksen
+* katsella tuloksia
+* editoida omia tuloksia 
+* poistaa omia tuloksia
+* etsiä tuloksia
+* vierailla käyttäjäsivulla
+* lisätä kommentteja tulokselle
+
+* loukittelujen oikein tekeminen on vielä työn alla
+* editoida kommentteja
+* poistaa kommentteja
