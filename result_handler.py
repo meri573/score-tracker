@@ -58,5 +58,16 @@ def get_all_classes():
     return classes
 
 def get_classes(result_id):
-    sql = "SELECT title, value FROM result_classes WHERE result_id = ?"
-    return db.query(sql, [result_id])
+    sql = "SELECT title, value FROM result_classes WHERE result_id = ? ORDER BY id"
+    temp = db.query(sql, [result_id])
+    print(temp)
+    for result in temp:
+        for thing in result:
+            print(thing)
+    classes = {}
+    for title, value in temp:
+        classes[title]=[]
+    for title, value in temp:
+        classes[title].append(value)
+    print(classes)
+    return classes
