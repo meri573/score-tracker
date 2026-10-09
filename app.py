@@ -31,23 +31,23 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html")
+    if request.method == "GET":
+        return render_template("register.html")
 
-@app.route("/create", methods=["POST"])
-def create():
-    username = request.form["username"]
-    password1 = request.form["password1"]
-    password2 = request.form["password2"]
-    if password1 != password2:
-        return "ERROR: passwords don't match"
-    try:
-        users.create_user(username, password1)
-    except sqlite3.IntegrityError:
-        return "ERROR: username already exists"
+    if request.method == "POST":
+        username = request.form["username"]
+        password1 = request.form["password1"]
+        password2 = request.form["password2"]
+        if password1 != password2:
+            return "ERROR: passwords don't match"
+        try:
+            users.create_user(username, password1)
+        except sqlite3.IntegrityError:
+            return "ERROR: username already exists"
 
-    return redirect("/")
+        return redirect("/")
 
 @app.route("/user/<int:user_id>")
 def user(user_id):
