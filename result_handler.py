@@ -3,7 +3,8 @@ import db
 def get_results():
     sql = """SELECT u.username, r.user_id, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
             FROM users u, results r  
-            WHERE r.user_id = u.id"""
+            WHERE r.user_id = u.id
+            ORDER BY r.submitted_at DESC"""
 
     return db.query(sql)
 
@@ -39,8 +40,7 @@ def search_results(query):
     sql = """SELECT u.username, r.id, r.time, r.score, r.submitted_at
             FROM users u, results r, result_classes c
             WHERE r.user_id = u.id AND r.id = c.result_id AND (u.username LIKE ? OR r.time LIKE ? OR r.score LIKE ? OR r.submitted_at LIKE ? OR c.value LIKE ?)
-            ORDER BY r.submitted_at desc"""
-    #sql = "SELECT u.username, r.id, r.time, r.score, r.submitted_at FROM users u, results r, result_classes c WHERE r.user_id = u.id AND r.id = c.result_id AND (u.username LIKE ? OR r.time LIKE ? OR r.score LIKE ? OR r.submitted_at LIKE ? OR c.value LIKE ?)"
+            ORDER BY r.submitted_at DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like, like, like, like])
 
