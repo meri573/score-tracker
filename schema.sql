@@ -22,7 +22,7 @@ CREATE TABLE comments (
     content TEXT,
     sent_at TEXT,
     user_id INTEGER REFERENCES users,
-    result_id INTEGER REFERENCES results
+    result_id INTEGER REFERENCES results ON DELETE CASCADE
 );
 
 CREATE TABLE classes (
@@ -33,7 +33,7 @@ CREATE TABLE classes (
 
 CREATE TABLE result_classes (
     id INTEGER PRIMARY KEY,
-    result_id INTEGER REFERENCES results,
+    result_id INTEGER REFERENCES results ON DELETE CASCADE,
     title TEXT,
     value TEXT
 );
