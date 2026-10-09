@@ -13,19 +13,8 @@
         <br />
         <a href="/user/{{ result.user_id }}">{{ result.username }}</a>
         <br />
-        {{ result.game }}
+        time: {{ result.time }}  score: {{ result.score }}
         <br />
-        time: {{ result.time }} grade: {{ result.grade }} score: {{ result.score }}
-        <br />
-        extras:
-        <br />
-        {% if result.twentyg_mode %}
-          twenty g mode
-        {% endif %}  
-        {% if result.big_mode %}
-          big mode
-        {% endif %}
-        <br>
         {{ result.submitted_at }}
       </li>
     </ul>

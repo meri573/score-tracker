@@ -18,18 +18,7 @@
             <br />
             {{ result.username }}
             <br />
-            {{ result.game }}
-            <br />
-            time: {{ result.time }} grade: {{ result.grade }} score: {{ result.score }}
-            <br />
-            extras:
-            <br />
-            {% if result.twentyg_mode %}
-                twenty g mode
-            {% endif %}  
-            {% if result.big_mode %}
-                big mode
-            {% endif %}
+            time: {{ result.time }} score: {{ result.score }}
             <br>
             {{ result.submitted_at }}</li>
             {% endfor %}
