@@ -1,46 +1,23 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Frontpage</title>
-</head>
+{% block title %}Frontpage{% endblock %}
 
-<body>
-  <h1>Frontpage</h1>
+{% block content %}
+
+<h1>Frontpage</h1>
   
-  <p>
-    <a href="/results">Results</a>
-  </p>
+<p>
+  <a href="/results">Results</a>
+</p>
 
-  {% if session.username %}
-  <p>
-    You are logged in as {{ session.username }}
-  </p>
-  <p>
-    <a href="/submit_score">Submit new score</a>
-  </p>
-  <p>
-    <a href="/logout">Logout</a>
-  </p>
+{% if session.user_id %}
+<p>
+  You are logged in as {{ session.username }}
+</p>
+<p>
+  <a href="/submit_score">Submit new score</a>
+</p>
+{% endif %}
 
-  {% else %}
-  <form action="/login" method="post">
-    <p>
-      username: <br />
-      <input type="text" name="username" required />
-    </p>
-    <p>
-      password: <br />
-      <input type="password" name="password" required />
-    </p>
-    <input type="submit" value="Login" />
-  </form>
-  <p>
-    <a href="/register">Register</a>
-  </p>
-
-  {% endif %}
-
-</body>
-
+{% endblock %}
 </html>
