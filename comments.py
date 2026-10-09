@@ -8,7 +8,8 @@ def add_comment(result_id, content, user_id):
 def get_comments(result_id):
     sql = """SELECT u.username, c.id, c.content, c.user_id, c.sent_at 
             FROM comments c, users u
-            WHERE c.user_id = u.id AND c.result_id = ?"""
+            WHERE c.user_id = u.id AND c.result_id = ?
+            ORDER BY c.sent_at DESC"""
     return(db.query(sql, [result_id]))
 
 def get_comment(comment_id):
@@ -19,7 +20,8 @@ def get_comment(comment_id):
 def get_user_comments(user_id):
     sql = """SELECT id, content, sent_at, result_id
             FROM comments
-            WHERE user_id = ?"""
+            WHERE user_id = ?
+            ORDER BY sent_at DESC"""
     return(db.query(sql, [user_id]))
 
 def update_comment(comment_id, content):
