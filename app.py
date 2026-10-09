@@ -37,6 +37,7 @@ def register():
 
 @app.route("/create", methods=["POST"])
 def create():
+    check_csrf()
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
@@ -63,6 +64,7 @@ def user(user_id):
 
 @app.route("/login", methods=["POST"])
 def login():
+    check_csrf()
     username = request.form["username"]
     password = request.form["password"]
 
