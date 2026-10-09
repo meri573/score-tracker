@@ -61,19 +61,23 @@ def user(user_id):
     return render_template("user.html", user=user, results=results, user_comments=user_comments)
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    username = request.form["username"]
-    password = request.form["password"]
+    if request.method == "GET":
+        return render_template("login.html")
 
-    user_id = users.check_login(username, password)
-    if user_id:
-        session["username"] = username
-        session["user_id"] = user_id
-        session["csrf_token"] = secrets.token_hex(16)
-        return redirect("/")
-    else:
-        return "ERROR: wrong username or password"
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        user_id = users.check_login(username, password)
+        if user_id:
+            session["username"] = username
+            session["user_id"] = user_id
+            session["csrf_token"] = secrets.token_hex(16)
+            return redirect("/")
+        else:
+            return "ERROR: wrong username or password"
 
 @app.route("/logout")
 def logout():
