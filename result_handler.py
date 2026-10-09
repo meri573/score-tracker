@@ -36,11 +36,13 @@ def delete_result(result_id):
     db.execute(sql, [result_id])
 
 def search_results(query):
-    sql = """SELECT u.username, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
-            FROM users u, results r  
-            WHERE r.user_id = u.id AND (u.username LIKE ? OR r.game LIKE ? OR r.time LIKE ? OR r.grade LIKE ? OR r.score LIKE ? OR r.submitted_at LIKE ?)"""
+    sql = """SELECT u.username, r.id, r.time, r.score, r.submitted_at
+            FROM users u, results r, result_classes c
+            WHERE r.user_id = u.id AND r.id = c.result_id AND (u.username LIKE ? OR r.time LIKE ? OR r.score LIKE ? OR r.submitted_at LIKE ? OR c.value LIKE ?)
+            ORDER BY r.submitted_at desc"""
+    #sql = "SELECT u.username, r.id, r.time, r.score, r.submitted_at FROM users u, results r, result_classes c WHERE r.user_id = u.id AND r.id = c.result_id AND (u.username LIKE ? OR r.time LIKE ? OR r.score LIKE ? OR r.submitted_at LIKE ? OR c.value LIKE ?)"
     like = "%" + query + "%"
-    return db.query(sql, [like, like, like, like, like, like])
+    return db.query(sql, [like, like, like, like, like])
 
 def get_all_classes():
     sql = "SELECT title, value FROM classes ORDER BY id"
