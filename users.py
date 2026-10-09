@@ -12,9 +12,10 @@ def get_user(user_id):
     return result[0] if result else None
 
 def get_results(user_id):
-    sql = """SELECT id, game, time, grade, score, twentyg_mode, big_mode, submitted_at
+    sql = """SELECT id, time, score, submitted_at
             FROM results
-            WHERE user_id = ?"""
+            WHERE user_id = ?
+            ORDER BY submitted_at DESC"""
     return db.query(sql, [user_id])
 
 def check_login(username, password):
