@@ -1,38 +1,37 @@
-<!DOCTYPE html>
-<html>
-    <body>
-    <h2>User {{ user.username }}</h2>
-    
-    <p>
-        User has submitted {{ results | count }} result(s) and {{ user_comments | count }} comment(s).
-    </p>
+{% extends "layout.html" %}
 
-    Results submitted by {{ user.username }}
-    {% for result in results %}
-    <ul>
-      <li>
+{% block title %} {{ user.username }}'s userpage {% endblock %}
 
-        <a href="/result/{{ result.id }}">details</a>
-        time: {{ result.time }} score: {{ result.score }}
-        <br />
-        {{ result.submitted_at }}
-      </li>
-    </ul>
-    {% endfor %}
+{% block content %}
+<h2>User {{ user.username }}</h2>
 
-    <p>
-      Comments made by {{ user.username }}
-    </p>
-    {% for comment in user_comments %}
-    <ul>
-      <li>
-        <a href="/result/{{comment.result_id}}">Result</a>
-        <br />
-        {{ comment.content }}
-        <br />
-        Sent at: {{ comment.sent_at }}
-      </li>
-    </ul>
-    {% endfor %}
-    </body>
-</html>
+<p>
+    User has submitted {{ results | count }} result(s) and {{ user_comments | count }} comment(s).
+</p>
+Results submitted by {{ user.username }}
+{% for result in results %}
+<ul>
+  <li>
+    <a href="/result/{{ result.id }}">details</a>
+    time: {{ result.time }} score: {{ result.score }}
+    <br />
+    {{ result.submitted_at }}
+  </li>
+</ul>
+{% endfor %}
+
+<p>
+  Comments made by {{ user.username }}
+</p>
+{% for comment in user_comments %}
+<ul>
+  <li>
+    <a href="/result/{{comment.result_id}}">Result</a>
+    <br />
+    {{ comment.content }}
+    <br />
+    Sent at: {{ comment.sent_at }}
+  </li>
+</ul>
+{% endfor %}
+{% endblock %}

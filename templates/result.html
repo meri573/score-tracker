@@ -1,66 +1,67 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    {% if session.username == result.username %}
-    <p style="text-align:right">
-      <a href="/edit_result/{{ result.id }}">Edit submission </a> &nbsp;
-      <a href="/delete_result/{{ result.id }}">Delete submission</a>
-    </p>
+{% extends "layout.html" %}
 
-    {% endif %}
+{% block title %}Result details{% endblock %}
 
-    <p>
-      <br />
-      <a href="/user/{{ result.user_id }}">{{ result.username }}</a>
-      <br />
-      {{ classes["game"][0] }}
-      <br />
-      time: {{ result.time }} grade: {{ classes["grade"][0] }} score: {{ result.score }}
-      <br />
-      extras:
-      <br />
-      {% if classes["extras"] %}
-        {% for extras in classes["extras"] %}
-          {{ extras }} <br />
-        {% endfor %}
-      {% endif %}
-      <br />
-      description from submitter:
-      <br />
-      {{ result.description }}
-      <br />
-      score submitted at: {{ result.submitted_at }}
-    </p>
-    
-    <form action="/new_comment" method="post">
-      <p>Add new comment</p>
-      <textarea name="content" rows="3" cols="50" maxlength="200" required></textarea>
-      <input type="hidden" name="result_id" value="{{ result.id }}" />
-      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-      <input type="submit" value="submit" />
-    </form>
-    <p>
-      Comments
-    </p>
-    {% for comment in result_comments %}
-    
-    <ul>
-      <li>
-        
-        <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a>
-        <br />
-        {{ comment.content }}
-        <br />
-        Sent at: {{ comment.sent_at }}
-        {% if session.user_id == comment.user_id %}
-        <br />
-        <a href="/edit_comment/{{ comment.id }}">Edit</a>
-        <a href="/delete_comment/{{ comment.id }}">Delete</a>
-        {% endif %} 
-      </li>
-    </ul>
+{% block content %}
+
+{% if session.username == result.username %}
+<p style="text-align:right">
+  <a href="/edit_result/{{ result.id }}">Edit submission </a> &nbsp;
+  <a href="/delete_result/{{ result.id }}">Delete submission</a>
+</p>
+
+{% endif %}
+
+<p>
+  <br />
+  <a href="/user/{{ result.user_id }}">{{ result.username }}</a>
+  <br />
+  {{ classes["game"][0] }}
+  <br />
+  time: {{ result.time }} grade: {{ classes["grade"][0] }} score: {{ result.score }}
+  <br />
+  extras:
+  <br />
+  {% if classes["extras"] %}
+    {% for extras in classes["extras"] %}
+      {{ extras }} <br />
     {% endfor %}
+  {% endif %}
+  <br />
+  description from submitter:
+  <br />
+  {{ result.description }}
+  <br />
+  score submitted at: {{ result.submitted_at }}
+</p>
 
-  </body>
+<form action="/new_comment" method="post">
+  <p>Add new comment</p>
+  <textarea name="content" rows="3" cols="50" maxlength="200" required></textarea>
+  <input type="hidden" name="result_id" value="{{ result.id }}" />
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  <input type="submit" value="submit" />
+</form>
+<p>
+  Comments
+</p>
+{% for comment in result_comments %}
 
-</html>
+<ul>
+  <li>
+    
+    <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a>
+    <br />
+    {{ comment.content }}
+    <br />
+    Sent at: {{ comment.sent_at }}
+    {% if session.user_id == comment.user_id %}
+    <br />
+    <a href="/edit_comment/{{ comment.id }}">Edit</a>
+    <a href="/delete_comment/{{ comment.id }}">Delete</a>
+    {% endif %} 
+  </li>
+</ul>
+{% endfor %}
+
+{% endblock %}

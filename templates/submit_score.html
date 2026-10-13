@@ -1,58 +1,54 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Score submission</title>
-</head>
+{% block title %}Score submission {% endblock %}
 
-<body>
-  <form action="/submission" method="post">
-    <p>
-      <label for="game">Game version</label> <br />
-      <select name="game" id="game">
-        {% for option in classes["game"] %}
-        <option value="game:{{ option }}">{{ option }}</option> 
-        {% endfor %}
-      </select>
-    </p>
-    <p>Time</p>
-    <p>
-      <input type="text" name="time" maxlength="20" required />
-    </p>
-    <p>Score</p>
-    <p>
-      <input type="number" name="score" maxlength="20" required />
-    </p>
-    <p>Grade</p>
- <p>
-      <label for="grade">Grade</label> <br />
-      <select name="grade" id="grade">
-        {% for option in classes["grade"] %}
-        <option value="grade:{{ option }}">{{ option }}</option> 
-        {% endfor %}
-      </select>
-    </p>
-    <p>Additional options</p>
-    <p>
-      <label for="extras">extras</label> <br />
-      {% for option in classes["extras"] %}
-      <input type="checkbox" name="extras" value="extras:{{ option }}" /> {{ option }}
+{% block content %}
+<form action="/submission" method="post">
+  <p>
+    <label for="game">Game version</label> <br />
+    <select name="game" id="game">
+      {% for option in classes["game"] %}
+      <option value="game:{{ option }}">{{ option }}</option> 
       {% endfor %}
-    </p>
-    <p>
-      <label for="rule">rule</label> <br />
-      <select name="rule" id="rule">
-        {% for option in classes["rule"] %}
-        <option value="rule:{{ option }}">{{ option }}</option>
-        {% endfor %}
-      </select>
-    </p>    
-    
-    <p>Description</p>
-    <textarea name="description" rows="3" cols="50" maxlength="200"></textarea>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-    <input type="submit" value="Submit" />
-  </form>
-</body>
+    </select>
+  </p>
+  <p>Time</p>
+  <p>
+    <input type="text" name="time" maxlength="20" required />
+  </p>
+  <p>Score</p>
+  <p>
+    <input type="number" name="score" maxlength="20" required />
+  </p>
+  <p>Grade</p>
+  <p>
+    <label for="grade">Grade</label> <br />
+    <select name="grade" id="grade">
+      {% for option in classes["grade"] %}
+      <option value="grade:{{ option }}">{{ option }}</option> 
+      {% endfor %}
+    </select>
+  </p>
+  <p>Additional options</p>
+  <p>
+    <label for="extras">extras</label> <br />
+    {% for option in classes["extras"] %}
+    <input type="checkbox" name="extras" value="extras:{{ option }}" /> {{ option }}
+    {% endfor %}
+  </p>
+  <p>
+    <label for="rule">rule</label> <br />
+    <select name="rule" id="rule">
+      {% for option in classes["rule"] %}
+      <option value="rule:{{ option }}">{{ option }}</option>
+      {% endfor %}
+    </select>
+  </p>    
+  
+  <p>Description</p>
+  <textarea name="description" rows="3" cols="50" maxlength="200"></textarea>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  <input type="submit" value="Submit" />
+</form>
 
-</html>
+{% endblock %}

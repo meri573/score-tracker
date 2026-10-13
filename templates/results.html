@@ -1,31 +1,28 @@
-<!DOCTYPE html>
-<html>
-  
-  <body>
-    <p style="text-align:right">
-      <a href="/search_results">Search results </a>
-    </p>
-    {% for result in results %}
-    <ul>
-      <li>
+{% extends "layout.html" %}
 
-        <a href="/result/{{ result.id }}">details</a>
-        <br />
-        <a href="/user/{{ result.user_id }}">{{ result.username }}</a>
-        <br />
-        time: {{ result.time }}  score: {{ result.score }}
-        <br />
-        {{ result.submitted_at }}
-      </li>
-    </ul>
+{% block title %}Results{% endblock %}
 
-  </body>
-  {% endfor %}
+{% block content %}
 
-  <p>
-    <a href="/results/{{ page - 1 }}">&lt;&lt;</a>
-    Page {{ page }}/{{ page_count }}
-    <a href="/results/{{ page + 1 }}">&gt;&gt;</a>
-  </p>
+{% for result in results %}
+<ul>
+  <li>
+    <a href="/result/{{ result.id }}">details</a>
+    <br />
+    <a href="/user/{{ result.user_id }}">{{ result.username }}</a>
+    <br />
+    time: {{ result.time }}  score: {{ result.score }}
+    <br />
+    {{ result.submitted_at }}
+  </li>
+</ul>
+
+{% endfor %}
+
+<p>
+  <a href="/results/{{ page - 1 }}">&lt;&lt;</a>
+  Page {{ page }}/{{ page_count }}
+  <a href="/results/{{ page + 1 }}">&gt;&gt;</a>
+</p>
 
 </html>
