@@ -1,15 +1,21 @@
 import db
 
-def get_results():
-    sql = """SELECT u.username, r.user_id, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at
+def result_count():
+    sql = "SELECT COUNT(*) FROM results"
+    return db.query(sql)[0][0]
+
+def get_results(page, page_size):
+    sql = """SELECT u.username, r.user_id, r.id, r.time, r.score, r.submitted_at
             FROM users u, results r  
             WHERE r.user_id = u.id
-            ORDER BY r.submitted_at DESC"""
-
-    return db.query(sql)
+            ORDER BY r.submitted_at DESC
+            LIMIT ? OFFSET ?"""
+    limit = page_size
+    offset = page_size * (page - 1)
+    return db.query(sql, [limit, offset])
 
 def get_result(result_id):
-    sql = """SELECT u.username, r.user_id, r.id, r.game, r.time, r.grade, r.score, r.twentyg_mode, r.big_mode, r.submitted_at, r.description
+    sql = """SELECT u.username, r.user_id, r.id, r.time, r.score, r.submitted_at, r.description
             FROM users u, results r  
             WHERE r.user_id = u.id AND r.id = ?"""
 
