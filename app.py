@@ -99,7 +99,7 @@ def results(page=1):
         return redirect("/results/" + str(page_count))
     
     results = result_handler.get_results(page, page_size)
-    return render_template("results.html",results=results)
+    return render_template("results.html",results=results, page=page, page_count=page_count)
 
 @app.route("/result/<int:result_id>")
 def result(result_id):
