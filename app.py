@@ -1,6 +1,6 @@
 import sqlite3
 import secrets
-import re
+import math
 
 from flask import Flask
 from flask import redirect,render_template, request, session, abort
@@ -86,8 +86,19 @@ def logout():
     return redirect("/")
 
 @app.route("/results")
-def results():
-    results = result_handler.get_results()
+@app.route("/results/<int:page>")
+def results(page=1):
+    result_count = result_handler.result_count()
+    page_size = config.PAGESIZE
+    page_count = math.ceil(result_count / page_size)
+    page_count = max(page_count, 1)
+
+    if page < 1:
+        return redirect("/results/1")
+    if page > page_count:
+        return redirect("/results/" + str(page_count))
+    
+    results = result_handler.get_results(page, page_size)
     return render_template("results.html",results=results)
 
 @app.route("/result/<int:result_id>")
