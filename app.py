@@ -46,7 +46,8 @@ def register():
         except sqlite3.IntegrityError:
             flash("ERROR: username already exists")
             return redirect("/register")
-
+        
+        flash("Registered succesfully")
         return redirect("/")
 
 @app.route("/user/<int:user_id>")
@@ -75,6 +76,7 @@ def login():
             session["username"] = username
             session["user_id"] = user_id
             session["csrf_token"] = secrets.token_hex(16)
+            flash("Logged in succesfully")
             return redirect("/")
         flash("ERROR: wrong username or password")
         return redirect("/login")
@@ -130,6 +132,7 @@ def delete_result(result_id):
         check_csrf()
         if "remove" in request.form:
             result_handler.delete_result(result_id)
+            flash("Result deleted")
             return redirect("/")
 
 @app.route("/edit_result/<int:result_id>")
@@ -161,6 +164,7 @@ def update_result():
 
     result_handler.update_result(result_id, description)
 
+    flash("Result updated")
     return redirect("/results")
 
 @app.route("/search_results")
@@ -185,6 +189,7 @@ def new_comment():
     user_id = session["user_id"]
 
     comments.add_comment(result_id, content, user_id)
+    flash("Comment submitted")
     return redirect("/result/" + str(result_id))
 
 @app.route("/edit_comment/<int:comment_id>")
@@ -218,6 +223,7 @@ def update_comment():
     print(content)
     comments.update_comment(comment_id, content)
 
+    flash("Comment edited")
     return redirect("/result/" + str(comment["result_id"]))
 
 
@@ -238,6 +244,7 @@ def delete_comment(comment_id):
         check_csrf()
         if "remove" in request.form:
             comments.delete_comment(comment_id)
+            flash("Comment deleted")
             return redirect("/result/" + str(comment["result_id"]))
 
 
@@ -275,8 +282,6 @@ def submission():
         else:
             abort(403)
 
-    print(classes)
-
 
     if not time or len(time) > 20:
         abort(403)
@@ -287,4 +292,5 @@ def submission():
 
     result_handler.add_result(time, score, description, user_id, classes)
 
+    flash("Submission succesful")
     return redirect("/results")
