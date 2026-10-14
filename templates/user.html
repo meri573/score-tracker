@@ -10,6 +10,7 @@
 </p>
 Results submitted by {{ user.username }}
 {% for result in results %}
+<div class="result">
 <ul>
   <li>
     <a href="/result/{{ result.id }}">details</a>
@@ -18,6 +19,7 @@ Results submitted by {{ user.username }}
     {{ result.submitted_at }}
   </li>
 </ul>
+</div>
 {% endfor %}
 
 <p>
