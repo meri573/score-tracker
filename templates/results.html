@@ -5,6 +5,7 @@
 {% block content %}
 
 {% for result in results %}
+<div class="result">
 <ul>
   <li>
     <a href="/result/{{ result.id }}">details</a>
@@ -16,7 +17,7 @@
     {{ result.submitted_at }}
   </li>
 </ul>
-
+</div>
 {% endfor %}
 
 <p>
