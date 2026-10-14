@@ -3,7 +3,7 @@ import secrets
 import math
 
 from flask import Flask
-from flask import redirect,render_template, request, session, abort, flash
+from flask import redirect, render_template, request, session, abort, flash
 
 import config
 import result_handler
