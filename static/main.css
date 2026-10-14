@@ -38,6 +38,10 @@ body {
     padding: 0.2em 0.5em
 }
 
+.comment {
+    background-color: whitesmoke 
+}
+
 h1,h2 {
     margin: 0;
 }
