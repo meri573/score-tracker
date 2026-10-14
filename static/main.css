@@ -60,3 +60,11 @@ nav li {
     padding: 0 1em;
     margin: 0;
 }
+
+nav li:not(:last-of-type) {
+    border-right: 1px solid black;
+}
+
+nav li:not(:first-of-type) {
+  margin-left: -0.25em;
+} 
