@@ -4,7 +4,7 @@
 
 * käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen
 * käyttäjä pystyy lisäämään muokkaamaan ja poistamaan tetriksessä saamiaan tuloksia
-* käyttäjä pystyy lisäämään kuvan tai videon todisteaineistoksi tuloksestaan
+* käyttäjä pystyy lisäämään kuvan tai videon todisteaineistoksi tuloksestaan (ei implementoitu)
 * käyttäjä voi lisätä kuvauksen tulokseensa
 * käyttäjä näkee sovellukseen lisätyt tulokset
 * käyttäjä pystyy etsimään tuloksia hakusanalla, pistemäärällä, tuloksen lisääjän tunnuksella, etc.
@@ -50,7 +50,7 @@ Sovelluksessa voi tällä hetkellä
 * etsiä tuloksia
 * vierailla käyttäjäsivulla
 * lisätä kommentteja tulokselle
-
-* loukittelujen oikein tekeminen on vielä työn alla, joten projekti ei välttämättä toimi oiken tällä hetkellä
+* lisätä luokkia tulokselle
 * editoida kommentteja
 * poistaa kommentteja
+* ihastella sovelluksen hienoa ulkoasua
