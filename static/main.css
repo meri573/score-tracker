@@ -1,0 +1,42 @@
+body {
+    margin: auto;
+    max-width: 50em;
+    font-family: sans-serif;
+    background-color: lightpink;
+}
+
+.header {
+    background-color: azure;
+    color: blueviolet;
+    padding: 1em;
+    margin: o.5em 0;
+}
+
+.nav {
+    background-color: lightskyblue;
+    padding:0.5em;
+    margin: 0.5em 0;
+}
+
+.info {
+    background-color: black;
+    color: red;
+    padding: 0em;
+    margin: 1em 2em;
+}
+
+.content {
+    background-color: aliceblue;
+    padding: 1em;
+    margin: 0.5em 0
+}
+
+.result {
+    border: 3px solid salmon;
+    margin: 1em;
+    padding: 0.2em 0.5em
+}
+
+h1,h2 {
+    margin: 0;
+}
