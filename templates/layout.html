@@ -3,10 +3,13 @@
 
 <head>
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/main.css">
 </head>
 
 <body>
+    <div class="header">
     <h1>Tetris the grandmaster result tracking site</h1>
+    </div>
 
     {% if session.user_id %}
     <p>
@@ -14,6 +17,7 @@
     </p>
     {% endif %}
 
+    <div class="nav">
     <p>
         <a href="/">Frontpage</a>
         <a href="/results">Results</a>
@@ -26,14 +30,19 @@
         <a href="/register">Register</a>
         {% endif %}
     </p>
+    </div>
 
+    <div class="info">
     {% for message in get_flashed_messages() %}
     <p>
         <b>{{ message }}</b>
     </p>
     {% endfor %}
+    </div>
 
+    <div class="content">
     {% block content %}{% endblock %}
+    </div>
 </body>
 
 </html>
