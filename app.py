@@ -3,7 +3,7 @@ import secrets
 import math
 
 from flask import Flask
-from flask import redirect,render_template, request, session, abort
+from flask import redirect,render_template, request, session, abort, flash
 
 import config
 import result_handler
@@ -39,11 +39,13 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            return "ERROR: passwords don't match"
+            flash("ERROR: passwords don't match")
+            return redirect("/register")
         try:
             users.create_user(username, password1)
         except sqlite3.IntegrityError:
-            return "ERROR: username already exists"
+            flash("ERROR: username already exists")
+            return redirect("/register")
 
         return redirect("/")
 
@@ -74,7 +76,8 @@ def login():
             session["user_id"] = user_id
             session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
-        return "ERROR: wrong username or password"
+        flash("ERROR: wrong username or password")
+        return redirect("/login")
 
 @app.route("/logout")
 def logout():
