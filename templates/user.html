@@ -26,6 +26,7 @@ Results submitted by {{ user.username }}
   Comments made by {{ user.username }}
 </p>
 {% for comment in user_comments %}
+<div class="comment">
 <ul>
   <li>
     <a href="/result/{{comment.result_id}}">Result</a>
@@ -35,5 +36,6 @@ Results submitted by {{ user.username }}
     Sent at: {{ comment.sent_at }}
   </li>
 </ul>
+</div>
 {% endfor %}
 {% endblock %}
