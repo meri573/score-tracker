@@ -4,9 +4,7 @@ import math
 
 from flask import Flask
 from flask import redirect,render_template, request, session, abort
-from werkzeug.security import generate_password_hash, check_password_hash
 
-import db
 import config
 import result_handler
 import users
@@ -76,8 +74,7 @@ def login():
             session["user_id"] = user_id
             session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
-        else:
-            return "ERROR: wrong username or password"
+        return "ERROR: wrong username or password"
 
 @app.route("/logout")
 def logout():
