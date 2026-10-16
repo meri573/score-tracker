@@ -20,14 +20,15 @@
   <br />
   time: {{ result.time }} grade: {{ classes["grade"][0] }} score: {{ result.score }}
   <br />
-  extras:
+  rule: {{classes["rule"][0]}}
   <br />
   {% if classes["extras"] %}
+    extras:
+    <br />
     {% for extras in classes["extras"] %}
       {{ extras }} <br />
     {% endfor %}
   {% endif %}
-  <br />
   description from submitter:
   <br />
   {{ result.description }}
