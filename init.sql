@@ -3,7 +3,7 @@ DELETE FROM classes;
 INSERT INTO classes (title, value) VALUES ('extras', 'big mode');
 INSERT INTO classes (title, value) VALUES ('extras', '20G mode');
 
-INSERT INTO classes (title, value) VALUES ('rule','tgm rule');
+INSERT INTO classes (title, value) VALUES ('rule','classic rule');
 INSERT INTO classes (title, value) VALUES ('rule','world rule');
 
 INSERT INTO classes (title, value) VALUES ('game','tgm1');
