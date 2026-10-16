@@ -31,7 +31,6 @@ def add_result(time, score, description, user_id, classes):
 
     sql = "INSERT INTO result_classes (result_id, title, value) VALUES (?,?,?)"
     for class_title, class_value in classes:
-        print(class_title, class_value)
         db.execute(sql, [result_id, class_title, class_value])
 
 def update_result(result_id, description):
@@ -60,22 +59,15 @@ def get_all_classes():
     for title, value in result:
         classes[title].append(value)
 
-    print(classes["rule"])
-    print(classes["game"])
-
     return classes
 
 def get_classes(result_id):
     sql = "SELECT title, value FROM result_classes WHERE result_id = ? ORDER BY id"
     temp = db.query(sql, [result_id])
-    print(temp)
-    for result in temp:
-        for thing in result:
-            print(thing)
+    
     classes = {}
     for title, value in temp:
         classes[title]=[]
     for title, value in temp:
         classes[title].append(value)
-    print(classes)
     return classes

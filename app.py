@@ -83,8 +83,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["username"]
-    del session["user_id"]
+    session.clear()
     return redirect("/")
 
 @app.route("/results")
@@ -194,7 +193,7 @@ def new_comment():
 
 @app.route("/edit_comment/<int:comment_id>")
 def edit_comment(comment_id):
-    require_login
+    require_login()
     comment = comments.get_comment(comment_id)
     if not comment:
         abort(404)
@@ -219,8 +218,6 @@ def update_comment():
     if not content or len(content) >200:
         abort(403)
 
-    print(comment_id)
-    print(content)
     comments.update_comment(comment_id, content)
 
     flash("Comment edited")
@@ -265,8 +262,6 @@ def submission():
     user_id = session["user_id"]
 
     all_classes = result_handler.get_all_classes()
-
-    print(request.form.getlist("extras"))
 
     classes = []
     temp_classes = [request.form["game"], request.form["grade"], request.form["rule"]]
