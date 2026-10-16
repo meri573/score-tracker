@@ -209,7 +209,7 @@ def update_comment():
 
     comment_id = int(request.form["comment_id"])
     comment = comments.get_comment(comment_id)
-    if not result:
+    if not comment:
         abort(404)
     if comment["user_id"] != session["user_id"]:
         abort(403)
@@ -247,6 +247,7 @@ def delete_comment(comment_id):
 
 @app.route("/submit_score")
 def submit_score():
+    require_login()
     classes = result_handler.get_all_classes()
     return render_template("submit_score.html", classes=classes)
 
